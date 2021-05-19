@@ -1,5 +1,9 @@
 <%= @lineup.name %><br>
 
 <% @lineup.players.each do |player| %>
-    <%= player.name %> - <%= player.postion %>
+    <%= player.name %> - <%= player.position %><br>
 <% end %>
+
+<%= link_to "Edit Lineup", edit_lineup_path(@lineup) %><br>
+<%= link_to "All Lineups", lineups_path %><br>
+<%= link_to "Delete Lineup", @lineup, method: :delete, data: { confirm: "Are you sure?" }%>

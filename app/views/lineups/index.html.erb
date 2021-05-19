@@ -1,0 +1,11 @@
+<h1>All Lineups</h1>
+
+<% @lineups.each do |lineup| %>
+    <p>
+    <%= link_to lineup.name, lineup_path(lineup) %> - 
+    <% lineup.players.each do |player| %>
+        <%= player.name %>: <%= player.position %>
+    <% end %>
+    <%= link_to "Delete Lineup", lineup, method: :delete, data: { confirm: "Are you sure?" } %>
+    </p>
+<% end %>
