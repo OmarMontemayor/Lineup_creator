@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_19_010050) do
+ActiveRecord::Schema.define(version: 2021_05_19_020244) do
 
   create_table "lineup_players", force: :cascade do |t|
     t.integer "lineup_id"

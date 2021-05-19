@@ -1,0 +1,5 @@
+<%= @lineup.name %><br>
+
+<% @lineup.players.each do |player| %>
+    <%= player.name %> - <%= player.postion %>
+<% end %>
