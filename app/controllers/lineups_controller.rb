@@ -1,5 +1,5 @@
 class LineupsController < ApplicationController
-
+    before_action :require_login
     def index
         @lineups = Lineup.all
     end
@@ -45,6 +45,10 @@ class LineupsController < ApplicationController
 
     private
 
+    def require_login
+        return head(:forbidden) unless session.include? :user_id
+    end
+    
     def lineup_params
         params.require(:lineup).permit(:name, player_ids: [], players_attributes: [:id, :name, :position])
     end

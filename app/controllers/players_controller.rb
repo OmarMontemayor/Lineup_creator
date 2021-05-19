@@ -1,5 +1,7 @@
 class PlayersController < ApplicationController
-    
+    before_action :require_login
+    skip_before_action :require_login, only [:index]
+
     def index
         @players = Player.all
     end
@@ -42,6 +44,9 @@ class PlayersController < ApplicationController
     end
 
     private
+    def require_login
+        return head(:forbidden) unless session.include? :user_id
+    end
 
     def player_params
         params.require(:player).permit(:name, :position)
