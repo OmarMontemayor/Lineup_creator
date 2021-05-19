@@ -1,14 +1,8 @@
-<%= form_for @lineup do |f| %>
+
 <%= f.label :name %>
 <%= f.text_field :name %><br>
 
-<%= f.fields_for :players, @lineup.players.build do |players_fields| %>
-    <label>Player Name:</label>
-    <%= players_fields.text_field :name %><br>
+<%= f.collection_check_boxes :player_ids, Player.all, :id, :name %><br>
 
-    <label>Player Position:</label>
-    <%= players_fields.text_field :position %><br>
-<% end %>
 
-<%= f.submit %>
-<% end %>
+

@@ -46,7 +46,7 @@ class LineupsController < ApplicationController
     private
 
     def lineup_params
-        params.require(:lineup).permit(:name, players_attributes: [:id, :name, :position])
+        params.require(:lineup).permit(:name, player_ids: [], players_attributes: [:id, :name, :position])
     end
 end
 
