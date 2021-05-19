@@ -1,0 +1,7 @@
+<h1><%= @player.name.capitalize %>'s Info</h1>
+
+<p>Position: <%= @player.position %></p>
+
+<%= link_to "Edit Player", edit_player_path(@player) %><br>
+<%= link_to "All Players", players_path %><br>
+<%= link_to "Delete Player", @player, method: :delete, data: { confirm: "Are you sure?" } %>
