@@ -1,5 +1,6 @@
 class LineupsController < ApplicationController
-    before_action :require_login
+    before_action [:logged_in?, :current_user, :set_user]
+
     def index
         @lineups = Lineup.all
     end

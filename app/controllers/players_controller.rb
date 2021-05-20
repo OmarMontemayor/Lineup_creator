@@ -1,9 +1,13 @@
 class PlayersController < ApplicationController
-    before_action :require_login
-    skip_before_action :require_login, only [:index]
-
+    before_action :logged_in?
     def index
-        @players = Player.all
+        if params[:name]
+            @players = Player.where('name LIKE ?', "%#{params[:name]}%")
+        elsif params[:position]
+            @players = Player.where('position LIKE ?', "%#{params[:position]}%")
+        else
+            @players = Player.all
+        end
     end
     
     def new

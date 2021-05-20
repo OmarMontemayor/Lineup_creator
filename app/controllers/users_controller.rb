@@ -1,11 +1,61 @@
 class UsersController < ApplicationController
+    skip_before_action :authorized, only: [:new, :create]
+    before_action :set_user, except: [:new, :create]
+
+    def new
+        @user = User.new
+    end
+
     def create
-        User.create(user_params)
+        @user = User.new(user_params)
+        if @user.save
+            session[:user_id] = @user.id
+            redirect_to new_lineup_path
+        else
+            render :new
+        end
+    end
+
+    def show
+        if !@user
+            redirect_to '/' 
+        elsif
+            @user.id == session[:user_id] 
+        else
+            redirect_to '/'
+        end
+    end
+
+    def edit
+        
+        if !@user || !@user.id == session[:user_id]
+            redirect_to '/'
+        end
+       
+    end
+
+    def update
+        if @user.update(user_params)
+            redirect_to user_path(@user)
+        else
+            render :edit
+        end
+    end
+
+    def destroy
+        delete_user_data
+        @user.destroy
+        session.clear
+        redirect_to root_path
     end
 
     private
 
+    def set_user
+        @user = User.find_by_id(params[:id])
+    end  
+
     def user_params
-        params.require(:user).permit(:name, :password, :password_confirmation)
+        params.require(:user).permit(:name, :password, :password_confirmation, :email, lineups:[])
     end
 end

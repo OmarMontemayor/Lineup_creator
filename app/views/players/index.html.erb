@@ -1,7 +1,17 @@
 <h1>All Players</h1>
 
+<%= form_tag(players_path, method: :get) do %>
+    Player Name: <%= text_field_tag :name, params[:name] %>
+    <%= submit_tag 'Search', name: nil %><br>
+<% end %>
+
+<%= form_tag(players_path, method: :get) do %>
+    Player Position: <%= text_field_tag :position, params[:position] %>
+    <%= submit_tag 'Search', name: nil %><br>
+<% end %>
+
 <p>
 <% @players.each do |player| %>
-    <%= link_to player.name.capitalize %> - <%= player.position.capitalize %>
+    <%= link_to player.name.capitalize %> - <%= player.position.capitalize %><br>
 <% end %>
 </p>
